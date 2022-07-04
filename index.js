@@ -1,22 +1,25 @@
 const express = require("express");
 const app = express();
 
+const adminApi = require("./api/adminRoutes");
+
+const studentApi = require("./api/studentRoutes");
+
+const staffApi = require("./api/staffRoutes");
+
 require("dotenv").config();
+
+const sqlCon = require("./models/DbCon");
 
 const port = process.env.SERVER_PORT || 3000;
 
-const sequelize = require("./config/DB_Con");
+app.use("/admin", adminApi);
 
-const doCon = async () => {
-  try {
-    await sequelize.authenticate();
-    console.log("Connection has been established successfully.");
-  } catch (error) {
-    console.error("Unable to connect to the database:", error);
-  }
-};
+app.use("/student", studentApi);
 
-doCon();
+app.use("/staff", staffApi);
+
+sqlCon();
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
