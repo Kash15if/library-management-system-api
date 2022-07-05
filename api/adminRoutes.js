@@ -8,8 +8,18 @@ const router = express.Router();
 //   res.send("Birds home page");
 // });
 
-// define the about route
-router.get("/about", (req, res) => {
+// admin dashboard route
+router.post("/admindashboard", (req, res) => {
+  res.send("About birds");
+});
+
+// admin login route
+router.post("/login", (req, res) => {
+  res.send("About birds");
+});
+
+// register login route
+router.post("/register", (req, res) => {
   res.send("About birds");
 });
 
