@@ -7,23 +7,23 @@ const studentApi = require("./api/studentRoutes");
 
 const staffApi = require("./api/staffRoutes");
 
+const publicApi = require("./api/publicRoutes");
+
 require("dotenv").config();
 
 const sqlCon = require("./models/DbCon");
 
 const port = process.env.SERVER_PORT || 3000;
 
-app.use("/admin", adminApi);
+app.use("/admin/protected/", adminApi);
 
 app.use("/student", studentApi);
 
 app.use("/staff", staffApi);
 
-sqlCon();
+app.use("/", publicApi);
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
+sqlCon();
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
